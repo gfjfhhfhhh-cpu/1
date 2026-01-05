@@ -1,0 +1,997 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hondenparadijs - Hondenkauw Pantoffels</title>
+<meta name="description" content="Handgemaakte, superzachte pantoffels in de vorm van een schattige hond. Wij steunen kleine asielen in Utrecht en Amsterdam – eind januari doneren wij de opbrengst!">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --background: hsl(40, 33%, 97%);
+  --foreground: hsl(25, 30%, 15%);
+  --card: hsl(40, 30%, 95%);
+  --card-foreground: hsl(25, 30%, 15%);
+  --primary: hsl(25, 45%, 35%);
+  --primary-foreground: hsl(40, 33%, 97%);
+  --secondary: hsl(35, 25%, 88%);
+  --secondary-foreground: hsl(25, 30%, 15%);
+  --muted: hsl(35, 20%, 90%);
+  --muted-foreground: hsl(25, 15%, 45%);
+  --accent: hsl(30, 55%, 45%);
+  --accent-foreground: hsl(40, 33%, 97%);
+  --border: hsl(35, 20%, 85%);
+  --promo-banner: hsl(25, 50%, 30%);
+  --promo-banner-foreground: hsl(40, 33%, 97%);
+  --sale-badge: hsl(0, 70%, 50%);
+  --sale-badge-foreground: hsl(0, 0%, 100%);
+  --success: hsl(142, 50%, 35%);
+  --star: hsl(45, 95%, 50%);
+  --radius: 0.75rem;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', system-ui, sans-serif;
+  background-color: var(--background);
+  color: var(--foreground);
+  line-height: 1.6;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+/* ========================================
+   PROMO BANNER
+   ======================================== */
+.promo-banner {
+  background-color: var(--promo-banner);
+  color: var(--promo-banner-foreground);
+  padding: 0.5rem 0;
+  overflow: hidden;
+}
+
+.promo-scroll {
+  display: flex;
+  white-space: nowrap;
+  animation: scroll 25s linear infinite;
+}
+
+.promo-scroll span {
+  margin: 0 2rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+@keyframes scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* ========================================
+   PRODUCT SECTION
+   ======================================== */
+.product-section {
+  padding: 2rem 0 3rem;
+}
+
+.product-grid {
+  display: grid;
+  gap: 2rem;
+}
+
+@media (min-width: 768px) {
+  .product-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+  }
+}
+
+.product-image-main {
+  aspect-ratio: 1;
+  border-radius: var(--radius);
+  overflow: hidden;
+  background-color: var(--secondary);
+}
+
+.product-image-main img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.product-thumbnails {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.product-thumbnails button {
+  aspect-ratio: 1;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  border: 2px solid transparent;
+  cursor: pointer;
+  padding: 0;
+  background: none;
+  transition: border-color 0.2s;
+}
+
+.product-thumbnails button:hover,
+.product-thumbnails button.active {
+  border-color: var(--accent);
+}
+
+.product-thumbnails img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.badge {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  background-color: var(--sale-badge);
+  color: var(--sale-badge-foreground);
+}
+
+.stars {
+  display: flex;
+  gap: 0.125rem;
+}
+
+.star {
+  color: var(--star);
+  width: 1rem;
+  height: 1rem;
+}
+
+.product-title {
+  font-size: 2rem;
+  font-weight: 700;
+  margin: 0.5rem 0;
+}
+
+.product-title em {
+  font-style: italic;
+}
+
+.product-description {
+  color: var(--muted-foreground);
+}
+
+.price-section {
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+  margin: 1.5rem 0;
+}
+
+.price-current {
+  font-size: 1.875rem;
+  font-weight: 700;
+}
+
+.price-old {
+  font-size: 1.25rem;
+  color: var(--muted-foreground);
+  text-decoration: line-through;
+}
+
+.features-list {
+  display: grid;
+  gap: 0.75rem;
+  margin: 1.5rem 0;
+}
+
+.feature-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.feature-icon {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  background-color: var(--secondary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.feature-icon svg {
+  width: 1.25rem;
+  height: 1.25rem;
+  color: var(--accent);
+}
+
+.size-selector {
+  margin: 1.5rem 0;
+}
+
+.size-selector label {
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 500;
+  margin-bottom: 0.75rem;
+}
+
+.size-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.size-btn {
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  border: 2px solid var(--border);
+  background-color: var(--background);
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.size-btn:hover,
+.size-btn.active {
+  border-color: var(--accent);
+  background-color: var(--accent);
+  color: var(--accent-foreground);
+}
+
+.add-to-cart-btn {
+  width: 100%;
+  padding: 1rem 2rem;
+  font-size: 1.125rem;
+  font-weight: 600;
+  background-color: var(--primary);
+  color: var(--primary-foreground);
+  border: none;
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: background-color 0.2s;
+  text-decoration: none;
+  display: block;
+  text-align: center;
+}
+
+.add-to-cart-btn:hover {
+  background-color: hsl(25, 45%, 30%);
+}
+
+.add-to-cart-btn:disabled,
+.add-to-cart-btn.disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.payment-icons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  padding-top: 1rem;
+  margin-top: 1rem;
+  border-top: 1px solid var(--border);
+}
+
+.payment-icons img {
+  height: 1.5rem;
+  opacity: 0.7;
+}
+
+/* ========================================
+   REVIEWS SECTION
+   ======================================== */
+.reviews-section {
+  padding: 3rem 0;
+  background-color: hsla(35, 25%, 88%, 0.5);
+}
+
+.section-title {
+  font-size: 1.875rem;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 0.5rem;
+}
+
+.reviews-subtitle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  color: var(--muted-foreground);
+  margin-bottom: 2.5rem;
+}
+
+.reviews-grid {
+  display: grid;
+  gap: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .reviews-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.review-card {
+  background-color: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+}
+
+.review-text {
+  font-style: italic;
+  margin: 1rem 0;
+}
+
+.review-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.review-author {
+  font-weight: 500;
+}
+
+.review-date {
+  font-size: 0.875rem;
+  color: var(--muted-foreground);
+}
+
+.verified {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  color: var(--success);
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+.verified svg {
+  width: 1rem;
+  height: 1rem;
+}
+
+/* ========================================
+   ABOUT SECTION
+   ======================================== */
+.about-section {
+  padding: 3rem 0 4rem;
+}
+
+.about-grid {
+  display: grid;
+  gap: 2rem;
+  align-items: center;
+}
+
+@media (min-width: 768px) {
+  .about-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+  }
+}
+
+.about-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background-color: hsla(30, 55%, 45%, 0.1);
+  color: var(--accent);
+  padding: 0.5rem 1rem;
+  border-radius: 9999px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  margin-bottom: 1rem;
+}
+
+.about-title {
+  font-size: 1.875rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+@media (min-width: 768px) {
+  .about-title {
+    font-size: 2.25rem;
+  }
+}
+
+.about-text {
+  color: var(--muted-foreground);
+}
+
+.about-text p {
+  margin-bottom: 1rem;
+}
+
+.about-text .highlight {
+  font-weight: 500;
+  color: var(--foreground);
+}
+
+.about-image {
+  aspect-ratio: 4/3;
+  border-radius: 1rem;
+  overflow: hidden;
+}
+
+@media (min-width: 768px) {
+  .about-content {
+    order: 1;
+  }
+  .about-image-wrapper {
+    order: 2;
+  }
+}
+
+.about-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ========================================
+   FAQ SECTION
+   ======================================== */
+.faq-section {
+  padding: 3rem 0 4rem;
+  background-color: hsla(35, 25%, 88%, 0.3);
+}
+
+.faq-container {
+  max-width: 48rem;
+  margin: 0 auto;
+}
+
+.faq-subtitle {
+  text-align: center;
+  color: var(--muted-foreground);
+  margin-bottom: 2.5rem;
+}
+
+.faq-item {
+  background-color: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  margin-bottom: 1rem;
+  overflow: hidden;
+}
+
+.faq-question {
+  width: 100%;
+  padding: 1rem 1.5rem;
+  background: none;
+  border: none;
+  text-align: left;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: color 0.2s;
+}
+
+.faq-question:hover {
+  color: var(--accent);
+}
+
+.faq-question svg {
+  width: 1.25rem;
+  height: 1.25rem;
+  transition: transform 0.2s;
+}
+
+.faq-item.open .faq-question svg {
+  transform: rotate(180deg);
+}
+
+.faq-answer {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+}
+
+.faq-item.open .faq-answer {
+  max-height: 500px;
+}
+
+.faq-answer-content {
+  padding: 0 1.5rem 1rem;
+  color: var(--muted-foreground);
+}
+
+/* ========================================
+   FOOTER
+   ======================================== */
+.footer {
+  background-color: var(--primary);
+  color: var(--primary-foreground);
+  padding: 3rem 0;
+}
+
+.footer-grid {
+  display: grid;
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+@media (min-width: 768px) {
+  .footer-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.footer-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.footer-description {
+  opacity: 0.8;
+  max-width: 28rem;
+}
+
+.footer-contact h3 {
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.footer-contact ul {
+  list-style: none;
+  opacity: 0.8;
+}
+
+.footer-contact li {
+  margin-bottom: 0.5rem;
+}
+
+.footer-bottom {
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  padding-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  text-align: center;
+}
+
+@media (min-width: 768px) {
+  .footer-bottom {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+}
+
+.footer-copyright {
+  font-size: 0.875rem;
+  opacity: 0.6;
+}
+
+.footer-love {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  opacity: 0.6;
+}
+
+.footer-love svg {
+  width: 1rem;
+  height: 1rem;
+  fill: currentColor;
+  color: var(--sale-badge);
+}
+</style>
+</head>
+<body>
+
+<!-- ========================================
+     PROMO BANNER
+     ======================================== -->
+<div class="promo-banner">
+  <div class="promo-scroll">
+    <span>🐕 2 paar gekocht = 1 gratis 🎉</span>
+    <span>🚚 Gratis verzekerde verzending in heel Nederland binnen 48 uur</span>
+    <span>❤️ Wij steunen kleine asielen in Utrecht & Amsterdam – eind januari doneren wij de opbrengst!</span>
+    <span>🐕 2 paar gekocht = 1 gratis 🎉</span>
+    <span>🚚 Gratis verzekerde verzending in heel Nederland binnen 48 uur</span>
+    <span>❤️ Wij steunen kleine asielen in Utrecht & Amsterdam – eind januari doneren wij de opbrengst!</span>
+    <span>🐕 2 paar gekocht = 1 gratis 🎉</span>
+    <span>🚚 Gratis verzekerde verzending in heel Nederland binnen 48 uur</span>
+    <span>❤️ Wij steunen kleine asielen in Utrecht & Amsterdam – eind januari doneren wij de opbrengst!</span>
+    <span>🐕 2 paar gekocht = 1 gratis 🎉</span>
+    <span>🚚 Gratis verzekerde verzending in heel Nederland binnen 48 uur</span>
+    <span>❤️ Wij steunen kleine asielen in Utrecht & Amsterdam – eind januari doneren wij de opbrengst!</span>
+  </div>
+</div>
+
+<!-- ========================================
+     PRODUCT SECTION
+     ======================================== -->
+<section class="product-section">
+  <div class="container">
+    <div class="product-grid">
+      
+      <!-- Product Images -->
+      <div>
+        <div class="product-image-main">
+          <!-- ✏️ EDIT: Main product image -->
+          <img id="mainImage" src="https://i.imgur.com/NTTRaFn.jpeg" alt="Hondenpantoffels">
+        </div>
+        <div class="product-thumbnails">
+          <!-- ✏️ EDIT: Thumbnail images -->
+          <button class="active" onclick="changeImage(0)">
+            <img src="https://i.imgur.com/NTTRaFn.jpeg" alt="Product 1">
+          </button>
+          <button onclick="changeImage(1)">
+            <img src="https://i.imgur.com/JsZPZ4p.jpeg" alt="Product 2">
+          </button>
+          <button onclick="changeImage(2)">
+            <img src="https://i.imgur.com/N2IPE0n.png" alt="Product 3">
+          </button>
+          <button onclick="changeImage(3)">
+            <img src="https://i.imgur.com/PCyKt01.jpeg" alt="Product 4">
+          </button>
+        </div>
+      </div>
+
+      <!-- Product Info -->
+      <div>
+        <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem;">
+          <span class="badge">-70%</span>
+          <div class="stars">
+            <svg class="star" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg class="star" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg class="star" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg class="star" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg class="star" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          </div>
+          <span style="font-size: 0.875rem; color: var(--muted-foreground);">(127 beoordelingen)</span>
+        </div>
+
+        <h1 class="product-title"><em>Hondenkauw Pantoffels</em></h1>
+        <p class="product-description">Handgemaakte, superzachte pantoffels in de vorm van een schattige hond. Perfect voor thuis en een geweldig cadeau voor hondenliefhebbers!</p>
+
+        <div class="price-section">
+          <span class="price-current">€9,99</span>
+          <span class="price-old">€34,99</span>
+        </div>
+
+        <div class="features-list">
+          <div class="feature-item">
+            <div class="feature-icon"><span style="font-size: 1.25rem;">🐕</span></div>
+            <span>Wij werken samen met en steunen kleine asielen in de provincies Utrecht en Amsterdam</span>
+          </div>
+          <div class="feature-item">
+            <div class="feature-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+            </div>
+            <span>Handgemaakt met liefde en aandacht voor detail</span>
+          </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+                        </div>
+                        <span>Gratis verzekerde verzending in heel Nederland binnen 48 uur</span>
+                    </div>
+          <div class="feature-item">
+            <div class="feature-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            </div>
+            <span>30 dagen niet-goed-geld-terug garantie</span>
+          </div>
+        </div>
+
+        <div class="size-selector">
+          <label>Selecteer maat:</label>
+          <div class="size-options">
+            <button class="size-btn" onclick="selectSize(this)">36-37</button>
+            <button class="size-btn" onclick="selectSize(this)">38-39</button>
+            <button class="size-btn" onclick="selectSize(this)">40-41</button>
+            <button class="size-btn" onclick="selectSize(this)">42-43</button>
+            <button class="size-btn" onclick="selectSize(this)">44-45</button>
+          </div>
+        </div>
+
+        <!-- ✏️ EDIT: Change the href below to your checkout URL -->
+        <a id="addToCartBtn" href="https://your-checkout-url.com" target="_blank" class="add-to-cart-btn disabled">Selecteer eerst een maat</a>
+
+        <div class="payment-icons">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/Visa_Inc._logo.svg" alt="Visa">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Mastercard-logo.svg" alt="Mastercard" style="height: 2rem;">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/f/fa/American_Express_logo_%282018%29.svg" alt="American Express" style="height: 2rem;">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========================================
+     REVIEWS SECTION
+     ======================================== -->
+<section class="reviews-section">
+  <div class="container">
+    <h2 class="section-title">Wat onze klanten zeggen</h2>
+    <div class="reviews-subtitle">
+      <div class="stars">
+        <svg class="star" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        <svg class="star" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        <svg class="star" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        <svg class="star" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        <svg class="star" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+      </div>
+      <span>4.9/5 gebaseerd op 127 beoordelingen</span>
+    </div>
+
+    <div class="reviews-grid">
+      <div class="review-card">
+        <div class="stars">
+          <svg class="star" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg class="star" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg class="star" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg class="star" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg class="star" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        </div>
+        <p class="review-text">"Absoluut geweldig! Mijn dochter is dol op honden en ze draagt deze pantoffels de hele dag. Supercomfortabel en zo schattig. Plus, het is voor een goed doel!"</p>
+        <div class="review-footer">
+          <div>
+            <p class="review-author">Emma de Vries</p>
+            <p class="review-date">2 weken geleden</p>
+          </div>
+          <div class="verified">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            Geverifieerd
+          </div>
+        </div>
+      </div>
+
+      <div class="review-card">
+        <div class="stars">
+          <svg class="star" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg class="star" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg class="star" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg class="star" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg class="star" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        </div>
+        <p class="review-text">"Gekocht als kerstcadeau voor mijn vrouw. Ze was er helemaal weg van! De kwaliteit is uitstekend en de verzending was supersnel. Aanrader!"</p>
+        <div class="review-footer">
+          <div>
+            <p class="review-author">Jan Bakker</p>
+            <p class="review-date">1 maand geleden</p>
+          </div>
+          <div class="verified">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            Geverifieerd
+          </div>
+        </div>
+      </div>
+
+      <div class="review-card">
+        <div class="stars">
+          <svg class="star" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg class="star" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg class="star" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg class="star" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg class="star" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        </div>
+        <p class="review-text">"Dit is al mijn derde paar! Ik draag ze stuk omdat ze zo lekker warm en zacht zijn. Geweldig dat de opbrengst naar honden gaat. ❤️🐕"</p>
+        <div class="review-footer">
+          <div>
+            <p class="review-author">Sophie van den Berg</p>
+            <p class="review-date">3 weken geleden</p>
+          </div>
+          <div class="verified">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            Geverifieerd
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========================================
+     ABOUT SECTION
+     ======================================== -->
+<section class="about-section">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-content">
+        <div class="about-badge">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+          <span>Ons verhaal</span>
+        </div>
+        <h2 class="about-title">Samen zorgen we voor honden die hulp nodig hebben</h2>
+        <div class="about-text">
+          <p>Hondenparadijs werkt nauw samen met kleine hondenasielen en opvangcentra in de provincies Utrecht en Amsterdam. We helpen en ondersteunen deze organisaties die dagelijks zorgen voor verwaarloosde en mishandelde honden.</p>
+          <p>Met de verkoop van onze unieke hondenpantoffels kunnen we voer, medische zorg en een veilige omgeving bieden aan deze prachtige dieren. Elke aankoop maakt direct verschil!</p>
+          <p class="highlight">💚 Eind januari doneren we de volledige opbrengst van deze pantoffels aan onze partnerasielen in Utrecht en Amsterdam!</p>
+        </div>
+      </div>
+      <div class="about-image-wrapper">
+        <div class="about-image">
+          <!-- ✏️ EDIT: About section image -->
+          <img src="https://i.imgur.com/ZLdrTtb.jpeg" alt="Honden in het opvangcentrum">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========================================
+     FAQ SECTION
+     ======================================== -->
+<section class="faq-section">
+  <div class="container">
+    <div class="faq-container">
+      <h2 class="section-title">Veelgestelde vragen</h2>
+      <p class="faq-subtitle">Heb je een vraag? We helpen je graag!</p>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          Hoe ondersteunt mijn aankoop de asielen?
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="faq-answer">
+          <p class="faq-answer-content">Wij werken samen met kleine hondenasielen in de provincies Utrecht en Amsterdam. 100% van de winst van elke verkochte pantoffel gaat direct naar deze opvangcentra. Eind januari doneren we de volledige opbrengst van de pantoffelverkoop aan onze partnerasielen!</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          Van welk materiaal zijn de pantoffels gemaakt?
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="faq-answer">
+          <p class="faq-answer-content">Onze pantoffels zijn gemaakt van hoogwaardig, zacht pluche materiaal aan de buitenkant en een comfortabele, warme voering aan de binnenkant. De zool is antislip voor veilig gebruik binnenshuis.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          Hoe lang duurt de verzending?
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="faq-answer">
+          <p class="faq-answer-content">Bestellingen binnen Nederland worden gratis verzekerd verzonden en zijn binnen 48 uur bij je! Voor België is dit 3-5 werkdagen. Je ontvangt een track & trace code zodra je bestelling is verzonden.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          Kan ik de pantoffels retourneren als ze niet passen?
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="faq-answer">
+          <p class="faq-answer-content">Ja, we bieden een 30 dagen niet-goed-geld-terug garantie. Als de pantoffels niet passen of niet aan je verwachtingen voldoen, kun je ze eenvoudig retourneren voor een volledige terugbetaling of een andere maat.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          Zijn de pantoffels geschikt voor kinderen?
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="faq-answer">
+          <p class="faq-answer-content">Absoluut! We hebben maten voor zowel kinderen als volwassenen (maat 36-45). De pantoffels zijn veilig, comfortabel en een perfect cadeau voor kleine hondenliefhebbers.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          Welke asielen ondersteunen jullie precies?
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="faq-answer">
+          <p class="faq-answer-content">We werken samen met verschillende kleine, lokale hondenasielen in de provincies Utrecht en Amsterdam. Deze kleinschalige opvangcentra hebben vaak minder middelen dan grote organisaties, maar doen fantastisch werk voor honden die een tweede kans verdienen.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========================================
+     FOOTER
+     ======================================== -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand">
+          <span>🐕</span>
+          <span>Hondenparadijs</span>
+        </div>
+        <p class="footer-description">Samen met kleine asielen in Utrecht en Amsterdam maken we het verschil voor honden die een tweede kans verdienen. Elke pantoffel draagt bij aan hun welzijn.</p>
+      </div>
+      <div class="footer-contact">
+        <h3>Contact</h3>
+        <ul>
+          <li>info@hondenparadijs.nl</li>
+          <li>+31 (0)20 789 45 23</li>
+          <li>Dierenweg 42</li>
+          <li>3582 KL Utrecht</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-copyright">© 2026 Hondenparadijs. Alle rechten voorbehouden.</p>
+      <div class="footer-love">
+        <span>Gemaakt met</span>
+        <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        <span>voor honden</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- ========================================
+     JAVASCRIPT
+     ======================================== -->
+<script>
+// ✏️ EDIT: Product images array - update these URLs with your actual product images
+const productImages = [
+      "https://i.imgur.com/NTTRaFn.jpeg",
+      "https://i.imgur.com/JsZPZ4p.jpeg",
+      "https://i.imgur.com/N2IPE0n.png",
+      "https://i.imgur.com/PCyKt01.jpeg"
+    ];
+
+// ✏️ EDIT: Your checkout URL - change this to your actual checkout page
+const CHECKOUT_URL = 'https://g3tsy.getsimplytrack.net/aff_c?offer_id=93297&aff_id=2260&source=Hondenkauw Pantoffels___https://i.imgur.com/NTTRaFn.jpeg';
+
+let selectedSize = null;
+
+function changeImage(index) {
+  document.getElementById('mainImage').src = productImages[index];
+  document.querySelectorAll('.product-thumbnails button').forEach((btn, i) => {
+    btn.classList.toggle('active', i === index);
+  });
+}
+
+function selectSize(btn) {
+  document.querySelectorAll('.size-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  selectedSize = btn.textContent;
+
+  const addToCartBtn = document.getElementById('addToCartBtn');
+  addToCartBtn.textContent = 'Toevoegen aan winkelwagen';
+  addToCartBtn.classList.remove('disabled');
+  addToCartBtn.style.pointerEvents = 'auto';
+  addToCartBtn.style.opacity = '1';
+  // You can add the size as a URL parameter if needed:
+  addToCartBtn.href = CHECKOUT_URL + '?size=' + encodeURIComponent(selectedSize);
+}
+
+function toggleFaq(btn) {
+  const item = btn.parentElement;
+  item.classList.toggle('open');
+}
+</script>
+
+</body>
+</html>
